@@ -1,0 +1,37 @@
+@Bean
+	CommandLineRunner start(
+			ClientRepository clientRepository,
+			CompteRepository compteRepository,
+			OperationRepository operationRepository
+	 ){
+		return args -> {
+			Stream.of("keumeni","jordan").forEach(nom->{
+				Client client= new Client();
+				client.setNom(nom);
+				client.setEmail(nom+"@gmail.com");
+				clientRepository.save(client);
+			});
+
+			clientRepository.findAll().forEach(cli->{
+				CompteCourant compteCourant=new CompteCourant();
+				compteCourant.setId(UUID.randomUUID().toString());
+				compteCourant.setDecouvert(Math.random()*1000 );
+				compteCourant.setDateCreation(new Date());
+				compteCourant.setStatus(Status.CREER);
+				compteCourant.setClient(cli);
+				compteCourant.setDecouvert(9000);
+				compteRepository.save(compteCourant);
+
+				CompteEpargne compteEpargne=new CompteEpargne();
+				compteEpargne.setId(UUID.randomUUID().toString());
+				compteEpargne.setSolde(Math.random()*3000);
+				compteEpargne.setDateCreation(new Date());
+				compteEpargne.setStatus(Status.CREER);
+				compteEpargne.setClient(cli);
+				compteEpargne.setTouxInteret(5.5 );
+				compteRepository.save(compteEpargne);
+			});
+
+
+		};
+	 }
