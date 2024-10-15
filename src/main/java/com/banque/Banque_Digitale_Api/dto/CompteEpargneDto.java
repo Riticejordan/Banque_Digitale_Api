@@ -14,12 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public  class CompteEpargneDto {
+public  class CompteEpargneDto extends CompteDto  {
     private String id;
     private double solde;
     private Date  dateCreation;
     private Status status;
-    private Client client ;
+    private ClientDto clientDto ;
 
     double touxInteret;
 
@@ -57,12 +57,12 @@ public  class CompteEpargneDto {
         this.status = status;
     }
 
-    public Client getClient() {
-        return client;
+    public ClientDto getClientDto() {
+        return clientDto;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientDto(ClientDto clientDto) {
+        this.clientDto = clientDto;
     }
 
     public double getTouxInteret() {

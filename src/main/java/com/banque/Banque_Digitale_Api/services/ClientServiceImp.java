@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -55,6 +56,13 @@ public class ClientServiceImp implements ClientService {
     @Override
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ClientDto> searchClient(String keyword) {
+        List<Client> clients=clientRepository.searchCustomer(keyword);
+        List<ClientDto> clientDtos = clients.stream().map(cust -> banaueMapperImpl.deClient(cust)).collect(Collectors.toList());
+        return clientDtos;
     }
 
     @Override

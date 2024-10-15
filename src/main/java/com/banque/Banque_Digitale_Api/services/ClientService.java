@@ -16,6 +16,7 @@ public interface ClientService {
      List<ClientDto> listeClient();
      ClientDto updateClient(ClientDto clientDto);
      void deleteClient(Long id);
+     List<ClientDto> searchClient(String keyword);
 
 
 
